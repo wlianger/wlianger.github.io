@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-08-11T12:23:03.059Z</updated>
+  <updated>2020-08-11T12:26:29.501Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2020/08/11/%E8%A2%AB%E5%9B%B4%E7%BB%95%E7%9A%84%E5%8C%BA%E5%9F%9F/"/>
     <id>http://yoursite.com/2020/08/11/%E8%A2%AB%E5%9B%B4%E7%BB%95%E7%9A%84%E5%8C%BA%E5%9F%9F/</id>
     <published>2020-08-11T12:14:45.682Z</published>
-    <updated>2020-08-11T12:23:03.059Z</updated>
+    <updated>2020-08-11T12:26:29.501Z</updated>
     
     <content type="html"><![CDATA[<h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><p>给定一个二维的矩阵，包含 ‘X’ 和 ‘O’（字母 O）。<br>找到所有被 ‘X’ 围绕的区域，并将这些区域里所有的 ‘O’ 用 ‘X’ 填充。</p><h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>X X X X<br>X O O X<br>X X O X<br>X O X X</p><p>运行你的函数后，矩阵变为：</p><p>X X X X<br>X X X X<br>X X X X<br>X O X X</p><h4 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h4><p>被围绕的区间不会存在于边界上，换句话说，任何边界上的 ‘O’ 都不会被填充为 ‘X’。 任何不在边界上，或不与边界上的 ‘O’ 相连的 ‘O’ 最终都会被填充为 ‘X’。如果两个元素在水平或垂直方向相邻，则称它们是“相连”的。</p><h4 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h4><p>对边界边做深度搜索，若某个点为O，则与其相连的点O都不能改成X，将其暂时标定为Z<br>然后对于所有点遍历，若某点为O，将其转换为X ，若某点为Z，将其转化为O。</p><h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><pre><code>class Solution {public:    void dfs(vector&lt;vector&lt;char&gt;&gt;&amp; board, int i, int j) {        if (!(i &gt;&#x3D; 0 &amp;&amp; j &gt;&#x3D; 0 &amp;&amp; i &lt; board.size() &amp;&amp; j &lt; board[0].size()))            return;        if (board[i][j] &#x3D;&#x3D; &#39;O&#39;)            board[i][j] &#x3D; &#39;Z&#39;;        else return;        dfs(board, i - 1, j);        dfs(board, i + 1, j);        dfs(board, i, j - 1);        dfs(board, i, j + 1);    }    void solve(vector&lt;vector&lt;char&gt;&gt;&amp; board) {        for (int i &#x3D; 0; i &lt; board.size(); i++)            for (int j &#x3D; 0; j &lt; board[i].size(); j++)                if ((i &#x3D;&#x3D; 0 || j &#x3D;&#x3D; 0 || i &#x3D;&#x3D; board.size() - 1 || j &#x3D;&#x3D; board[i].size() - 1) &amp;&amp; (board[i][j] &#x3D;&#x3D; &#39;O&#39;))                    dfs(board, i, j);        for (int i &#x3D; 0; i &lt; board.size(); i++)            for (int j &#x3D; 0; j &lt; board[i].size(); j++)                if (board[i][j] &#x3D;&#x3D; &#39;O&#39;)                    board[i][j] &#x3D; &#39;X&#39;;                else if (board[i][j] &#x3D;&#x3D; &#39;Z&#39;)                    board[i][j] &#x3D; &#39;O&#39;;        return;    }};</code></pre><p>More info: <a href="https://leetcode-cn.com/problems/surrounded-regions/">LeetCode</a></p>]]></content>
     
@@ -42,6 +42,8 @@
     
       <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
     
+      <category term="深度优先搜索" scheme="http://yoursite.com/tags/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/"/>
+    
   </entry>
   
   <entry>
@@ -49,9 +51,9 @@
     <link href="http://yoursite.com/2020/08/11/%E9%87%91%E5%AD%97%E5%A1%94%E8%BD%AC%E6%8D%A2%E7%9F%A9%E9%98%B5/"/>
     <id>http://yoursite.com/2020/08/11/%E9%87%91%E5%AD%97%E5%A1%94%E8%BD%AC%E6%8D%A2%E7%9F%A9%E9%98%B5/</id>
     <published>2020-08-11T11:56:38.450Z</published>
-    <updated>2020-08-11T12:16:22.449Z</updated>
+    <updated>2020-08-11T12:36:24.642Z</updated>
     
-    <content type="html"><![CDATA[<h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><p>现在，我们用一些方块来堆砌一个金字塔。 每个方块用仅包含一个字母的字符串表示。<br>使用三元组表示金字塔的堆砌规则如下：<br>对于三元组(A, B, C) ，“C”为顶层方块，方块“A”、“B”分别作为方块“C”下一层的的左、右子块。当且仅当(A, B, C)是被允许的三元组，我们才可以将其堆砌上。<br>初始时，给定金字塔的基层 bottom，用一个字符串表示。一个允许的三元组列表 allowed，每个三元组用一个长度为 3 的字符串表示。<br>如果可以由基层一直堆到塔尖就返回 true ，否则返回 false 。</p><h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>输入: bottom = “BCD”, allowed = [“BCG”, “CDE”, “GEA”, “FFF”]<br>输出: true<br>解析：<br>可以堆砌成这样的金字塔:<br>    A<br>   / <br>  G   E<br> / \ / <br>B   C   D<br>因为符合(‘B’, ‘C’, ‘G’), (‘C’, ‘D’, ‘E’) 和 (‘G’, ‘E’, ‘A’) 三种规则。</p><p>输入：bottom = “AABA”, allowed = [“AAA”, “AAB”, “ABA”, “ABB”, “BAC”]<br>输出：false<br>解析：<br>无法一直堆到塔尖。<br>注意, 允许存在像 (A, B, C) 和 (A, B, D) 这样的三元组，其中 C != D。</p><h4 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h4><p>1.bottom 的长度范围在 [2, 8]。<br>2.allowed 的长度范围在[0, 200]。<br>3.方块的标记字母范围为{‘A’, ‘B’, ‘C’, ‘D’, ‘E’, ‘F’, ‘G’}。</p><h4 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h4><p>有了最后一层，算出上一层的可能的解。因为存在ABC ,ABD的这种情况，所以可能的解一定不唯一。用vector存起来，假设有M个解。<br>如果找到了可能的解，就相当于把问题从底层是n个字符，简化成有m个底层是（n-1）个字符的字符串，其中是否存在一个是金字塔转换后的底。<br>如果没找到上一层，证明这串字符为底是没有解的，返回false就好。<br>那么，把你得到M个新的底层再循环计算即可，直到有一个有解，就返回true,否则，false。<br>那什么时候可以直接知道有没有解呢？陷入，当你获取到的上一层只有一个字符的时候，就到达金字塔塔顶了，就一定是个解。返回true.</p><h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><pre><code>class Solution {public:    bool pyramidTransition(string bottom, vector&lt;string&gt;&amp; allowed) {        if(bottom.length() &#x3D;&#x3D; 1){            return true;        }        std::vector&lt;string&gt; ableStr;        for(int i &#x3D; 0;i &lt; bottom.length() - 1;i++){            bool bFind &#x3D; false;            std::vector&lt;string&gt; ableStrTest;            ableStrTest &#x3D; ableStr;            ableStr.clear();            for(string str:allowed){                if(str.substr(0,2) &#x3D;&#x3D; bottom.substr(i,2)){                    bFind &#x3D; true;                    if(ableStrTest.begin() &#x3D;&#x3D; ableStrTest.end()){                        ableStr.push_back(str.substr(2,1));                    }else{                        for(string a:ableStrTest){                            ableStr.push_back(a.append(str,2,1));                        }                    }                }            }            if(!bFind){                return false;            }        }        for(string str:ableStr){            if(pyramidTransition(str,allowed)){                return true;            }        }        return false;    }};</code></pre><p>More info: <a href="https://leetcode-cn.com/problems/pyramid-transition-matrix/">LeetCode</a></p>]]></content>
+    <content type="html"><![CDATA[<h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><p>现在，我们用一些方块来堆砌一个金字塔。 每个方块用仅包含一个字母的字符串表示。<br>使用三元组表示金字塔的堆砌规则如下：<br>对于三元组(A, B, C) ，“C”为顶层方块，方块“A”、“B”分别作为方块“C”下一层的的左、右子块。当且仅当(A, B, C)是被允许的三元组，我们才可以将其堆砌上。<br>初始时，给定金字塔的基层 bottom，用一个字符串表示。一个允许的三元组列表 allowed，每个三元组用一个长度为 3 的字符串表示。<br>如果可以由基层一直堆到塔尖就返回 true ，否则返回 false 。</p><h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>输入: bottom = “BCD”, allowed = [“BCG”, “CDE”, “GEA”, “FFF”]<br>输出: true<br>解析：<br>因为符合(‘B’, ‘C’, ‘G’), (‘C’, ‘D’, ‘E’) 和 (‘G’, ‘E’, ‘A’) 三种规则。</p><p>输入：bottom = “AABA”, allowed = [“AAA”, “AAB”, “ABA”, “ABB”, “BAC”]<br>输出：false<br>解析：<br>无法一直堆到塔尖。<br>注意, 允许存在像 (A, B, C) 和 (A, B, D) 这样的三元组，其中 C != D。</p><h4 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h4><p>1.bottom 的长度范围在 [2, 8]。<br>2.allowed 的长度范围在[0, 200]。<br>3.方块的标记字母范围为{‘A’, ‘B’, ‘C’, ‘D’, ‘E’, ‘F’, ‘G’}。</p><h4 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h4><p>有了最后一层，算出上一层的可能的解。因为存在ABC ,ABD的这种情况，所以可能的解一定不唯一。用vector存起来，假设有M个解。<br>如果找到了可能的解，就相当于把问题从底层是n个字符，简化成有m个底层是（n-1）个字符的字符串，其中是否存在一个是金字塔转换后的底。<br>如果没找到上一层，证明这串字符为底是没有解的，返回false就好。<br>那么，把你得到M个新的底层再循环计算即可，直到有一个有解，就返回true,否则，false。<br>那什么时候可以直接知道有没有解呢？陷入，当你获取到的上一层只有一个字符的时候，就到达金字塔塔顶了，就一定是个解。返回true。</p><h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><pre><code>class Solution {public:    bool pyramidTransition(string bottom, vector&lt;string&gt;&amp; allowed) {        if(bottom.length() &#x3D;&#x3D; 1){            return true;        }        std::vector&lt;string&gt; ableStr;        for(int i &#x3D; 0;i &lt; bottom.length() - 1;i++){            bool bFind &#x3D; false;            std::vector&lt;string&gt; ableStrTest;            ableStrTest &#x3D; ableStr;            ableStr.clear();            for(string str:allowed){                if(str.substr(0,2) &#x3D;&#x3D; bottom.substr(i,2)){                    bFind &#x3D; true;                    if(ableStrTest.begin() &#x3D;&#x3D; ableStrTest.end()){                        ableStr.push_back(str.substr(2,1));                    }else{                        for(string a:ableStrTest){                            ableStr.push_back(a.append(str,2,1));                        }                    }                }            }            if(!bFind){                return false;            }        }        for(string str:ableStr){            if(pyramidTransition(str,allowed)){                return true;            }        }        return false;    }};</code></pre><p>More info: <a href="https://leetcode-cn.com/problems/pyramid-transition-matrix/">LeetCode</a></p>]]></content>
     
     <summary type="html">
     
@@ -108,9 +110,9 @@
     <link href="http://yoursite.com/2020/08/09/%E5%AD%97%E6%AF%8D%E5%BC%82%E5%91%B3%E8%AF%8D%E5%88%86%E7%BB%84/"/>
     <id>http://yoursite.com/2020/08/09/%E5%AD%97%E6%AF%8D%E5%BC%82%E5%91%B3%E8%AF%8D%E5%88%86%E7%BB%84/</id>
     <published>2020-08-09T04:48:57.690Z</published>
-    <updated>2020-08-11T00:22:17.317Z</updated>
+    <updated>2020-08-11T12:29:34.170Z</updated>
     
-    <content type="html"><![CDATA[<h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><p>给定一个字符串数组，将字母异位词组合在一起。字母异位词指字母相同，但排列不同的字符串。</p><h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>输入: [“eat”, “tea”, “tan”, “ate”, “nat”, “bat”]<br>输出:<br>[<br>  [“ate”,”eat”,”tea”],<br>  [“nat”,”tan”],<br>  [“bat”]<br>]         </p><h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><p>1.所有输入均为小写字母。<br>2.不考虑答案输出的顺序。</p><h4 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h4><p>设置一个用于比较的string类型的vector数组，对已有的string类型的vector数组从开始进行遍历。将首次出现的字符组合放入比较数组sign和最终答案数组ans[k++][0]当中，并将sign中的字符串字符按序排列，将strs[i]排序后与sign中的组合依次比较，若发现sign中某个字符串与strs[i]排序后的大小相同,则将该组合的字符串放入ans数组对应行之中，反之，则放入ans[k++][0]，并将排序后的字符串组合放入sign中。</p><h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><pre><code>class Solution {public:    vector&lt;vector&lt;string&gt;&gt; groupAnagrams(vector&lt;string&gt;&amp; strs) {int g&#x3D;0,j;vector&lt;vector&lt;string&gt; &gt; ans;vector&lt;string&gt; sign;    string aid;vector&lt;string&gt; aa;    int sum&#x3D;strs.size();    for(int i&#x3D;0;i&lt;sum;i++)    {if(i&#x3D;&#x3D;0){            aa.push_back(strs[i]);ans.push_back(aa);            aa.clear();sign.push_back(strs[i]);sort(sign[g].begin(),sign[g++].end());continue;}aid&#x3D;strs[i];sort(aid.begin(),aid.end());for(j&#x3D;0;j&lt;sign.size();j++){if(aid&#x3D;&#x3D;sign[j]){ans[j].push_back(strs[i]);break;}}if(j&#x3D;&#x3D;sign.size())        {            aa.push_back(strs[i]);            ans.push_back(aa);            aa.clear();            sign.push_back(strs[i]);sort(sign[g].begin(),sign[g++].end());        }}return ans;}};</code></pre><p>More info: <a href="https://leetcode-cn.com/problems/missing-number/">LeetCode</a></p>]]></content>
+    <content type="html"><![CDATA[<h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><p>给定一个字符串数组，将字母异位词组合在一起。字母异位词指字母相同，但排列不同的字符串。</p><h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>输入: [“eat”, “tea”, “tan”, “ate”, “nat”, “bat”]<br>输出:<br>[<br>  [“ate”,”eat”,”tea”],<br>  [“nat”,”tan”],<br>  [“bat”]<br>]         </p><h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><p>1.所有输入均为小写字母。<br>2.不考虑答案输出的顺序。</p><h4 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h4><p>设置一个用于比较的string类型的vector数组，对已有的string类型的vector数组从开始进行遍历。将首次出现的字符组合放入比较数组sign和最终答案数组ans[k++][0]当中，并将sign中的字符串字符按序排列，将strs[i]排序后与sign中的组合依次比较，若发现sign中某个字符串与strs[i]排序后的大小相同,则将该组合的字符串放入ans数组对应行之中，反之，则放入ans[k++][0]，并将排序后的字符串组合放入sign中。</p><h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><pre><code>class Solution {public:    vector&lt;vector&lt;string&gt;&gt; groupAnagrams(vector&lt;string&gt;&amp; strs) {int g&#x3D;0,j;vector&lt;vector&lt;string&gt; &gt; ans;vector&lt;string&gt; sign;    string aid;vector&lt;string&gt; aa;    int sum&#x3D;strs.size();    for(int i&#x3D;0;i&lt;sum;i++)    {if(i&#x3D;&#x3D;0){            aa.push_back(strs[i]);ans.push_back(aa);            aa.clear();sign.push_back(strs[i]);sort(sign[g].begin(),sign[g++].end());continue;}aid&#x3D;strs[i];sort(aid.begin(),aid.end());for(j&#x3D;0;j&lt;sign.size();j++){if(aid&#x3D;&#x3D;sign[j]){ans[j].push_back(strs[i]);break;}}if(j&#x3D;&#x3D;sign.size())        {            aa.push_back(strs[i]);            ans.push_back(aa);            aa.clear();            sign.push_back(strs[i]);sort(sign[g].begin(),sign[g++].end());        }}return ans;}};</code></pre><p>More info: <a href="https://leetcode-cn.com/problems/group-anagrams/">LeetCode</a></p>]]></content>
     
     <summary type="html">
     
@@ -118,6 +120,35 @@
       
         &lt;h4 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h4&gt;&lt;p&gt;给定一个字符串数组，将字母异位词组合在一起。字母异位词指字母相同，但排列不同的字符串。&lt;/p&gt;
 &lt;h4 id=&quot;示例&quot;&gt;&lt;a href=&quot;#
+      
+    
+    </summary>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/categories/LeetCode/"/>
+    
+    
+      <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>缺失的数字</title>
+    <link href="http://yoursite.com/2020/08/09/%E7%BC%BA%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97/"/>
+    <id>http://yoursite.com/2020/08/09/%E7%BC%BA%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97/</id>
+    <published>2020-08-09T03:56:48.819Z</published>
+    <updated>2020-08-11T12:25:33.427Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><p>给定一个包含 0, 1, 2, …, n 中 n 个数的序列，找出 0 .. n 中没有出现在序列中的那个数。</p><h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>输入: [3,0,1]<br>输出: 2         </p><p>输入: [9,6,4,2,3,5,7,0,1]<br>输出: 8</p><h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><p>你的算法应具有线性时间复杂度。你能否仅使用额外常数空间来实现?</p><h4 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h4><p>可以先求出1到n的数字之和，然后减去所给数字即可。</p><h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><pre><code>class Solution {public:    int missingNumber(vector&lt;int&gt;&amp; nums){        int sum&#x3D;0,sum1&#x3D;0;        for(int i&#x3D;0;i&lt;nums.size();i++)        {            sum+&#x3D;nums[i];            sum1+&#x3D;i;        }        sum1+&#x3D;(nums.size());        return sum1-sum;    }};</code></pre><p>More info: <a href="https://leetcode-cn.com/problems/missing-number/">LeetCode</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h4&gt;&lt;p&gt;给定一个包含 0, 1, 2, …, n 中 n 个数的序列，找出 0 .. n 中没有出现在序列中的那个数。&lt;/p&gt;
+&lt;h4 id=&quot;示例
       
     
     </summary>
